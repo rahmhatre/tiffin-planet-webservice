@@ -1,7 +1,7 @@
 {
-  "name": "tiffin-planet-api",
+  "name": "tiffin-planet-webservice",
   "version": "1.0.0",
-  "description": "Tiffin Planet API",
+  "description": "Tiffin Planet Webservice",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

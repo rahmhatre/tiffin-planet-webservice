@@ -44,19 +44,19 @@ users.get(baseURL, async (req, res) => {
 });
 
 // Login by username and password
-users.get(`${baseURL}/login`, async (req, res) => {
+users.post(`${baseURL}/login`, async (req, res) => {
   try {
-    console.log('🚀 ~ file: users.js ~ line 48 ~ users.get ~ req?.query', req?.query);
-    if (!req?.query?.email || !req?.query?.password) {
+    console.log('🚀 ~ file: users.js ~ line 48 ~ users.get ~ req?.body', req?.body);
+    if (!req?.body?.email || !req?.body?.password) {
       return res.status(401).json({ status: 401, message: 'Please check the login credentials supplied.' });
     }
     // Find if we have user with same email already saved
-    const userExists = await UserModel.findOne({ email: req?.query?.email });
+    const userExists = await UserModel.findOne({ email: req?.body?.email });
     if (!userExists) {
-      return res.status(400).json({ status: 400, message: 'User does not exists.' });
+      return res.status(401).json({ status: 401, message: 'User does not exists. Please sign up to register.' });
     }
 
-    userExists.comparePassword(req?.query?.password, (matchError, isMatch) => {
+    userExists.comparePassword(req?.body?.password, (matchError, isMatch) => {
       if (matchError) {
         return res.status(401).json({ status: 401 });
       } else if (!isMatch) {

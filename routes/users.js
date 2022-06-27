@@ -2,6 +2,7 @@ const express = require('express');
 const users = express.Router();
 const UserModel = require('../models/userModel');
 const baseURL = '/users';
+const { UserStatus } = require('./../common/Enums');
 
 //Post Method
 users.post(baseURL, async (req, res) => {
@@ -17,7 +18,9 @@ users.post(baseURL, async (req, res) => {
     email: req?.body?.email,
     authMode: req?.body?.authMode,
     password: req?.body?.password,
+    userType: req?.body?.userType,
     isShopVerified: false,
+    status: UserStatus.ACTIVE,
   });
 
   try {

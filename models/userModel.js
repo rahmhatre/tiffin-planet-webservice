@@ -14,11 +14,19 @@ const userSchema = new mongoose.Schema(
     },
     authMode: {
       required: true,
-      type: String, // TODO: ENUM - Password(MD5) / Google Auth
+      type: String,
+    },
+    userType: {
+      required: true,
+      type: String,
+    },
+    status: {
+      required: true,
+      type: String,
     },
     password: {
       required: false,
-      type: String, // TODO: This is MD5 hashed
+      type: String,
     },
     isShopVerified: {
       required: false,
@@ -35,14 +43,6 @@ const userSchema = new mongoose.Schema(
     postcode: {
       required: false,
       type: String,
-    },
-    status: {
-      required: false,
-      type: String, // TODO: ENUMS - ACTIVE / INACTIVE
-    },
-    userType: {
-      required: false,
-      type: String, // TODO: ENUMS - ADMIN / USER / SHOP
     },
   },
   {

@@ -4,9 +4,6 @@ const express = require('express');
 var cors = require('cors');
 const mongoose = require('mongoose');
 
-// Enable CORS
-app.use(cors());
-
 // Routes
 const users = require('./routes/users');
 const orders = require('./routes/orders');
@@ -32,6 +29,9 @@ database.once('connected', () => {
 // App
 const app = express();
 app.use(express.json());
+
+// Enable CORS
+app.use(cors());
 
 // API base URL for all endpoints
 app.use('/api', users);

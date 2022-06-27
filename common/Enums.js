@@ -1,15 +1,15 @@
-export const AuthMode = {
+const AuthMode = {
   GOOGLE: 'GOOGLE',
   CLASSIC: 'CLASSIC',
 };
 
-export const UserType = {
+const UserType = {
   ADMIN: 'ADMIN',
   USER: 'USER',
   DEVELOPER: 'DEVELOPER',
 };
 
-export const UserStatus = {
+const UserStatus = {
   ACTIVE: 'ACTIVE',
   INACTIVE: 'INACTIVE',
 };

@@ -2,7 +2,7 @@ const express = require('express');
 const users = express.Router();
 const UserModel = require('../models/userModel');
 const baseURL = '/users';
-const { UserStatus } = require('./../common/Enums');
+const { UserStatus, AuthMode, UserType } = require('./../common/Enums');
 
 //Post Method
 users.post(baseURL, async (req, res) => {
@@ -65,6 +65,40 @@ users.post(`${baseURL}/login`, async (req, res) => {
         return res.status(200).json({ status: 200 });
       }
     });
+  } catch (error) {
+    res.status(400).json({ status: 400, message: error.message });
+  }
+});
+
+// Login by email and username which is authenticated with Google
+users.post(`${baseURL}/googlelogin`, async (req, res) => {
+  try {
+    if (!req?.body?.email || !req?.body?.name) {
+      return res.status(401).json({ status: 401, message: 'Please check the login credentials supplied.' });
+    }
+
+    // Find if we have user with same email already saved
+    const userExists = await UserModel.findOne({ email: req?.body?.email });
+
+    // If user does not exist then create a new user with email and user name and let him login
+    if (!userExists) {
+      // POST user
+      const data = new UserModel({
+        name: req?.body?.name,
+        email: req?.body?.email,
+        authMode: AuthMode.GOOGLE,
+        userType: UserType.USER,
+        isShopVerified: false,
+        status: UserStatus.ACTIVE,
+      });
+      try {
+        const dataToSave = await data.save();
+        return res.status(200).json({ status: 200, message: 'User created and logged in successfully.' });
+      } catch (error) {
+        return res.status(400).json({ status: 400, message: error.message });
+      }
+    }
+    return res.status(200).json({ status: 200, message: 'User logged in successfully.' });
   } catch (error) {
     res.status(400).json({ status: 400, message: error.message });
   }

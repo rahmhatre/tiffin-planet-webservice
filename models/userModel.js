@@ -53,6 +53,12 @@ const userSchema = new mongoose.Schema(
 userSchema.pre('save', function (next) {
   const login = this;
 
+  // If password is not entered which could be possible in Google Auth Flow
+  // Skip the password hash method
+  if (!login?.password) {
+    return next();
+  }
+
   if (this.isModified('password') || this.isNew) {
     bcrypt.genSalt(10, function (saltError, salt) {
       if (saltError) {

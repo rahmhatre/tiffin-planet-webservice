@@ -22,7 +22,7 @@ register.post('/register', async (req, res) => {
   const data = new UserModel({
     name: req?.body?.name,
     email: req?.body?.email,
-    authMode: req?.body?.authMode,
+    authMode: AuthMode.CLASSIC,
     password: req?.body?.password,
     userType: req?.body?.userType,
     isShopVerified: false,

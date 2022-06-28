@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema(
       required: false,
       type: String,
     },
+    accessToken: {
+      required: false,
+      type: String,
+    },
     isShopVerified: {
       required: false,
       type: Boolean, // Shop user needs to verify this user for the details to be populated

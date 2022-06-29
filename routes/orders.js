@@ -20,8 +20,10 @@ orders.post(baseURL, async (req, res) => {
 
   // Convert order shipment date to Date Format
   const dateObj = moment(req?.body?.orderShipmentDate).startOf('day');
-  // Check if you have an order for the same day which you are trying to create
+
+  // Check if you have an order for the user for same day which you are trying to create
   const orderExists = await OrderModel.findOne({
+    userId: req?.body?.userId,
     orderShipmentDate: {
       $gte: dateObj.toDate(),
       $lte: moment(dateObj).endOf('day').toDate(),

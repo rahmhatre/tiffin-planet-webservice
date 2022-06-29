@@ -58,7 +58,7 @@ register.post('/login', async (req, res) => {
       } else {
         // Create NEW jwt token and save in db
         const newlyCreatedObj = await generateJWTTokenAndSaveUpdateDB(userExists?._id, userExists?.email);
-        return res.status(200).json({ status: 200 });
+        return res.status(200).setHeader('Authorization', newlyCreatedObj?.accessToken).json({ status: 200 });
       }
     });
   } catch (error) {
@@ -92,7 +92,7 @@ register.post('/googlelogin', async (req, res) => {
         const dataToSave = await data.save();
         // Create NEW jwt token and save in db
         const newlyCreatedObj = await generateJWTTokenAndSaveUpdateDB(dataToSave?._id, dataToSave?.email);
-        return res.status(200).json({ status: 200, message: 'User created and logged in successfully.' });
+        return res.status(200).setHeader('Authorization', newlyCreatedObj?.accessToken).json({ status: 200, message: 'User created and logged in successfully.' });
       } catch (error) {
         return res.status(400).json({ status: 400, message: error.message });
       }
@@ -100,7 +100,7 @@ register.post('/googlelogin', async (req, res) => {
 
     // Create NEW jwt token and save in db
     const newlyCreatedObj = await generateJWTTokenAndSaveUpdateDB(userExists?._id, userExists?.email);
-    return res.status(200).json({ status: 200, message: 'User logged in successfully.' });
+    return res.status(200).setHeader('Authorization', newlyCreatedObj?.accessToken).json({ status: 200, message: 'User logged in successfully.' });
   } catch (error) {
     res.status(400).json({ status: 400, message: error.message });
   }

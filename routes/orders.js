@@ -28,7 +28,7 @@ orders.post(baseURL, async (req, res) => {
     },
   });
   if (orderExists) {
-    return res.status(400).json({ status: 400, message: 'Order already exists on the same day to be created, please try updating the order instead.' });
+    return res.status(400).json({ status: 400, message: 'Order already exists on the same day, please update the order instead.' });
   }
 
   // Construct object in mongoose for saving

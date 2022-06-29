@@ -14,4 +14,13 @@ const UserStatus = Object.freeze({
   INACTIVE: 'INACTIVE',
 });
 
-module.exports = { UserStatus, UserType, AuthMode };
+const OrderStatus = Object.freeze({
+  PROCESSING: 'PROCESSING',
+  DELIVERED: 'DELIVERED',
+  CANCELLED: 'CANCELLED',
+  TRANSIT: 'TRANSIT',
+  PAYMENTDUE: 'PAYMENTDUE',
+  PROBLEM: 'PROBLEM',
+});
+
+module.exports = { UserStatus, UserType, AuthMode, OrderStatus };

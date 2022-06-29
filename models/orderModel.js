@@ -1,23 +1,23 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema(
   {
-    user_id: {
+    userId: {
       required: true,
       type: String,
     },
-    delivery_date: {
+    orderShipmentDate: {
       required: true,
-      type: String,
+      type: Date,
     },
-    cancelled: {
+    status: {
       required: true,
-      type: Boolean,
+      type: String, // OrderStatus Enum
     },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
-module.exports = mongoose.model("Order", orderSchema);
+module.exports = mongoose.model('orders', orderSchema);

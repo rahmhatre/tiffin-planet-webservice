@@ -13,15 +13,15 @@ const userSchema = new mongoose.Schema(
       unique: true,
     },
     authMode: {
-      required: true,
+      required: true, // AuthMode Enum
       type: String,
     },
     userType: {
-      required: true,
+      required: true, // UserType Enum
       type: String,
     },
     status: {
-      required: true,
+      required: true, // UserStatus Enum
       type: String,
     },
     password: {

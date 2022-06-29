@@ -35,7 +35,7 @@ users.patch(`${baseURL}/:id`, async (req, res) => {
     const id = req.params.id;
     const updatedData = req.body;
     const options = { new: true };
-    const result = await Model.findByIdAndUpdate(id, updatedData, options);
+    const result = await UserModel.findByIdAndUpdate(id, updatedData, options);
     res.send(result);
   } catch (error) {
     res.status(400).json({ status: 400, message: error.message });

@@ -4,7 +4,7 @@ const express = require('express');
 var cors = require('cors');
 const mongoose = require('mongoose');
 
-const auth = require('./middleware/auth');
+const { authenticateToken } = require('./middleware/auth');
 
 // Routes
 const register = require('./routes/register');
@@ -50,8 +50,8 @@ app.use(cors());
 
 // API base URL for all endpoints
 app.use('/api', register);
-app.use('/api', users);
-app.use('/api', orders);
+app.use('/api', authenticateToken, users);
+app.use('/api', authenticateToken, orders);
 
 app.listen(port, () => {
   console.log(`Server Started at ${port}`);

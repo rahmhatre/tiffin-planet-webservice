@@ -17,6 +17,7 @@ const UserStatus = Object.freeze({
 const OrderStatus = Object.freeze({
   PROCESSING: 'PROCESSING',
   DELIVERED: 'DELIVERED',
+  ACTIVE: 'ACTIVE',
   CANCELLED: 'CANCELLED',
   TRANSIT: 'TRANSIT',
   PAYMENTDUE: 'PAYMENTDUE',

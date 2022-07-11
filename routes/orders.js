@@ -51,7 +51,7 @@ orders.post(baseURL, async (req, res) => {
 //Get all Method
 orders.get(baseURL, async (req, res) => {
   try {
-    const data = await OrderModel.find(req?.query);
+    const data = await OrderModel.find(req?.query).sort({ orderShipmentDate: 'asc' });
     return res.json(data);
   } catch (error) {
     res.status(400).json({ status: 400, message: error.message });

@@ -32,7 +32,7 @@ register.post('/register', async (req, res) => {
     const dataToSave = await data.save();
     // Create NEW jwt token and save in db
     const newlyCreatedObj = await generateJWTTokenAndSaveUpdateDB(dataToSave?._id, dataToSave?.email);
-    res.status(201).json({ status: 201, message: 'User created successfully.' });
+    res.status(201).setHeader('Authorization', newlyCreatedObj?.accessToken).json({ status: 201, message: 'User created successfully.' });
   } catch (error) {
     res.status(400).json({ status: 400, message: error.message });
   }

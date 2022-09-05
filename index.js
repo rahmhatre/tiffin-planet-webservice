@@ -10,6 +10,7 @@ const { authenticateToken } = require('./middleware/auth');
 const register = require('./routes/register');
 const users = require('./routes/users');
 const orders = require('./routes/orders');
+const notifications = require('./routes/notifications');
 
 // ENV Variables
 const { DATABASE_URL, PORT } = process.env;
@@ -30,17 +31,6 @@ mongoose
     process.exit(1);
   });
 
-// TODO: Old MongoDB connection code
-// const database = mongoose.connection;
-// // Log exception if error
-// database.on('error', (error) => {
-//   console.log(error);
-// });
-// // Console log once connection established
-// database.once('connected', () => {
-//   console.log('Database Connected');
-// });
-
 // App
 const app = express();
 app.use(express.json());
@@ -52,6 +42,7 @@ app.use(cors());
 app.use('/api', register);
 app.use('/api', authenticateToken, users);
 app.use('/api', authenticateToken, orders);
+app.use('/api', authenticateToken, notifications);
 
 app.listen(port, () => {
   console.log(`Server Started at ${port}`);
